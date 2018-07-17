@@ -4,7 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Login from './views/login/Login';
 // import Register from './views/register/Register';
 import Container from './container/Container';
-import './App.css';
+// import './App.css';
 
 @inject("stores")
 class App extends Component {

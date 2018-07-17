@@ -14,7 +14,7 @@ export default class Network {
         
         // let _now = new Date().getTime();
         // return this.access_token != '' && this.expire_time > (_now / 1000);
-        return true;
+        return false;
     }
 
 
