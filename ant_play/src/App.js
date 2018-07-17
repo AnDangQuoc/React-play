@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import Login from './views/login/Login';
+// import Register from './views/register/Register';
 import Container from './container/Container';
-import { Button } from 'antd';
-import logo from './logo.svg';
 import './App.css';
 
+@inject("stores")
 class App extends Component {
+  @observer
   render() {
+    let { network} = this.props.stores;
+    let isLoggedIn = network.isLoggedIn();
+
     return (
-      <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Button type="primary"> Hello How are you </Button> */}
-        <Container />
-      </div>
-    );
+      <HashRouter>
+        <div>
+          <Route path="*" render={() => (
+            isLoggedIn ? (
+              <Container />
+            ) : (
+                <Switch>
+                  <Route path="/register" component={Login} />
+                  <Route component={Login} />
+                </Switch>
+              )
+          )} />
+        </div>
+      </HashRouter>
+    )
   }
 }
 
